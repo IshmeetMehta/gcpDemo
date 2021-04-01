@@ -65,7 +65,7 @@ steps:
     kustomize edit set image ishmeetmehta/gcpdemo=gcr.io/$PROJECT_ID/gcpdemo:$COMMIT_SHA
 
 # This step pushes the image to Kubernetes cluster
-- id: 'Update Manifest'
+- id: 'Apply Manifest'
   name: 'gcr.io/cloud-builders/kubectl' 
   waitFor: ['Push to GCR Container Registry']
   args:
