@@ -54,14 +54,16 @@ steps:
   - 'CLOUDSDK_CONTAINER_CLUSTER=hello-cloudbuild'
   # [END cloudbuild]
 
-# Update Manifest in Anthos Config Management Directory 
+  # Update Manifest in Anthos Config Management Directory 
 - id: 'Update Manifest'
-  name: 'gcr.io/$PROJECT_ID/kustomize'
-  args: ['edit', 'set image', 'ishmeetmehta/gcpdemo=gcr.io/$PROJECT_ID/gcpdemo:$COMMIT_SHA']
-  env:
-  - 'APPLY=true'
-  - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=your-cluster'
+  name: 'gcr.io/anthos-tech-summit/gitops:1.0'
+args:
+  - '-c' # pass what follows as a command to bash
+  - |
+    cd k8s/overlays/production
+    kustomize edit set image ishmeetmehta/gcpDemo=gcr.io/$PROJECT_ID/gcpdemo:$COMMIT_SHA
+    kustomize build > gcpdemo/k8s/base/deployment.yaml
+  
 
 # This step pushes the image to Kubernetes cluster
 - id: 'ApplyManifest'
