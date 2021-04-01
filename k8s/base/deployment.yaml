@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: gcpdemo
-        image: gcr.io/GOOGLE_CLOUD_PROJECT/gcpdemo:COMMIT_SHA
+        image: gcr.io/$PROJECT_ID/gcpDemo:latest
         ports:
         - containerPort: 8080
 
