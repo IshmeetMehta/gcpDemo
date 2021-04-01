@@ -29,7 +29,7 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'gcr.io/$PROJECT_ID/gcpDemo:$SHORT_SHA'
+  - 'gcr.io/$PROJECT_ID/gcpdemo:$SHORT_SHA'
   - '.'
 
 # This step pushes the image to Container Registry
@@ -39,5 +39,5 @@ steps:
   id: 'Push to GCR Container Registry'
   args:
   - 'push'
-  - 'gcr.io/$PROJECT_ID/gcpDemo:$SHORT_SHA'
+  - 'gcr.io/$PROJECT_ID/gcpdemo:$SHORT_SHA'
 # [END cloudbuild]
