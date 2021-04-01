@@ -8,6 +8,3 @@ patchesStrategicMerge:
 images:
 - name: gcr.io/$PROJECT_ID/gcpDemo
   newName: gcr.io/$PROJECT_ID/gcpdemo:$latest
-  
-resources:
-- ../../base
