@@ -56,14 +56,13 @@ steps:
  # Update Manifest in Anthos Config Management Directory 
 - id: 'Update Manifest'
   name: 'gcr.io/$PROJECT_ID/kustomize:latest'
-  waitFor: ['Push to GCR Container Registry']
+  waitFor: ['Delete from GKE']
   entrypoint: 'sh'
   args:
   - '-c' # pass what follows as a command to bash
   - |
     cd k8s/overlays/production
     kustomize edit set image ishmeetmehta/gcpDemo=gcr.io/$PROJECT_ID/gcpdemo:$COMMIT_SHA
-    kustomize build > k8s/base/deployment.yaml
   
 # This step pushes the image to Kubernetes cluster
 - id: 'ApplyManifest'
