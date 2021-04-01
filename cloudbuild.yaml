@@ -48,7 +48,7 @@ steps:
   args:
   - 'apply'
   - '-f'
-  - 'k8s/overlays/production/csp-config-management/tech-summit/namespaces/google/deployment.yaml'
+  - 'k8s/base/deployment.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=$_CLOUDSDK_COMPUTE_ZONE'
   - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLOUDSDK_CONTAINER_CLUSTER'

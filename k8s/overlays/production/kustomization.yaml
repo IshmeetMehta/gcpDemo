@@ -7,7 +7,7 @@ patchesStrategicMerge:
 
 images:
 - name: ishmeetmehta/gcpDemo
-  newName: gcr.io//gcpDemo
+  newName: gcr.io//gcpdemo
   
 resources:
 - ../../base

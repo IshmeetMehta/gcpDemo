@@ -15,22 +15,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-cloudbuild
+  name: gcpdemo
   labels:
-    app: hello-cloudbuild
+    app: gcpdemo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello-cloudbuild
+      app: gcpdemo
   template:
     metadata:
       labels:
-        app: hello-cloudbuild
+        app: gcpdemo
     spec:
       containers:
-      - name: hello-cloudbuild
-        image: gcr.io/GOOGLE_CLOUD_PROJECT/hello-cloudbuild:COMMIT_SHA
+      - name: gcpdemo
+        image: gcr.io/ishmeetm/gcpdemo:COMMIT_SHA
         ports:
         - containerPort: 8080
 
