@@ -62,7 +62,7 @@ steps:
   - 'APPLY=true'
   - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
   - 'CLOUDSDK_CONTAINER_CLUSTER=your-cluster'
-tags: ['cloud-builders-community']
+  tags: ['cloud-builders-community']
 
 # This step pushes the image to Kubernetes cluster
 - id: 'ApplyManifest'
