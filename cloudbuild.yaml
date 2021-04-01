@@ -56,9 +56,9 @@ steps:
   - 'CLOUDSDK_CONTAINER_CLUSTER=hello-cloudbuild'
 
  # Update Manifest in Anthos Config Management Directory 
-- id: 'Delete from GKE'
+- id: 'Update Manifest'
   name: 'gcr.io/$PROJECT_ID/kustomize:latest'
-  waitFor: ['Push to GCR Container Registry']
+  waitFor: ['Delete from GKE']
   entrypoint: 'sh'
   args:
   - '-c' # pass what follows as a command to bash
