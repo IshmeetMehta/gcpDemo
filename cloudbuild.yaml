@@ -41,3 +41,17 @@ steps:
   - 'push'
   - 'gcr.io/$PROJECT_ID/gcpdemo:$SHORT_SHA'
 # [END cloudbuild]
+
+
+
+# This step pushes the image to Kubernetes cluster
+- id: 'Push to GKE'
+  name: 'gcr.io/cloud-builders/kubectl' 
+  waitFor: ['Update Manifest']
+  args:
+  - 'apply'
+  - '-f'
+  - 'k8s/overlays/production/csp-config-management/tech-summit/namespaces/google/deployment.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=$_CLOUDSDK_COMPUTE_ZONE'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLOUDSDK_CONTAINER_CLUSTER'
