@@ -51,6 +51,8 @@ steps:
   - |
     cd k8s/overlays/production
     kustomize edit set image ishmeetmehta/gcpDemo=gcr.io/$PROJECT_ID/gcpdemo:$COMMIT_SHA
+    cd ../../..
+    kustomize build k8s/overlays/production > k8s/base/deployment.yaml
   
 # This step pushes the image to Kubernetes cluster
 - id: 'ApplyManifest'
