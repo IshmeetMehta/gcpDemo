@@ -68,7 +68,7 @@ steps:
 # This step pushes the image to Kubernetes cluster
 - id: 'ApplyManifest'
   name: 'gcr.io/cloud-builders/kubectl' 
-  waitFor: ['Update Manifest]
+  waitFor: ['Update Manifest']
   args:
   - 'apply'
   - '-k'
