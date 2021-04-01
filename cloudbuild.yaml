@@ -16,7 +16,7 @@
 steps:
 # This step runs the unit tests on the app
 - name: 'python:3.7-slim'
-  id: Test
+  id: 'Run Tests'
   entrypoint: /bin/sh
   args:
   - -c
@@ -24,7 +24,7 @@ steps:
 
 # This step builds the container image.
 - name: 'gcr.io/cloud-builders/docker'
-  id: Build
+  id: 'Create Container'
   args:
   - 'build'
   - '-t'
@@ -35,8 +35,47 @@ steps:
 # The PROJECT_ID and SHORT_SHA variables are automatically
 # replaced by Cloud Build.
 - name: 'gcr.io/cloud-builders/docker'
-  id: Push
+  id: 'Push to GCR Container Registry'
   args:
   - 'push'
   - 'gcr.io/$PROJECT_ID/hello-cloudbuild:$SHORT_SHA'
 # [END cloudbuild]
+
+# Update Manifest in Anthos Config Management Directory 
+
+- name: 'gcr.io/anthos-tech-summit/gitops:1.0'
+  id: 'Update Manifest'
+  waitFor: ['Push to GCR Container Registry']
+  entrypoint: 'bash'
+  secretEnv: ['PASSWORD']
+  args:
+  - '-c' # pass what follows as a command to bash
+  - |
+    cd k8s/overlays/production
+    kustomize edit set image ishmeetmehta/gcpDemo=gcr.io/$PROJECT_ID/gcpdemo:$BUILD_ID
+    git clone https://github.com/IshmeetMehta/csp-config-management.git
+    kustomize build > csp-config-management/tech-summit/namespaces/google/deployment.yaml
+    cd csp-config-management/
+    git config --global user.email "$_GIT_EMAIL"
+    git config --global user.name "$_GIT_USER"
+    git commit -am "manifest change $BUILD_ID"
+    echo "Test:" $$PASSSWORD
+    git push https://$_GIT_USER:$$PASSWORD@github.com/$_GIT_USER/csp-config-management.git
+
+- id: 'Push to GKE'
+  name: 'gcr.io/cloud-builders/kubectl' 
+  waitFor: ['Update Manifest']
+  args:
+  - 'apply'
+  - '-f'
+  - 'k8s/overlays/production/csp-config-management/tech-summit/namespaces/google/deployment.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=$_CLOUDSDK_COMPUTE_ZONE'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLOUDSDK_CONTAINER_CLUSTER'
+
+
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/1046932852410/secrets/gh-password/versions/1
+    env: 'PASSWORD'

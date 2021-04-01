@@ -6,8 +6,8 @@ patchesStrategicMerge:
 - custom-env.yaml
 
 images:
-- name: bkauf/gcpdemo
-  newName: gcr.io//gcpdemo
+- name: ishmeetmehta/gcpDemo
+  newName: gcr.io//gcpDemo
   
 resources:
 - ../../base
