@@ -42,18 +42,17 @@ steps:
   - 'gcr.io/$PROJECT_ID/gcpdemo:$COMMIT_SHA'
 
   # This step deletes existing deployment if any
-# - id: 'Delete from GKE'
-#   name: 'gcr.io/cloud-builders/kubectl' 
-#   waitFor: ['Push to GCR Container Registry']
-#   args:
-#   - 'delete'
-#   - '-f'
-#   - 'k8s/base/deployment.yaml'
-#   - '|| exit 0'
-#   env:
-#   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-b'
-#   - 'CLOUDSDK_CONTAINER_CLUSTER=hello-cloudbuild'
-  # [END cloudbuild]
+- id: 'Delete from GKE'
+  name: 'gcr.io/cloud-builders/kubectl' 
+  waitFor: ['Push to GCR Container Registry']
+  args:
+  - 'delete'
+  - '-f'
+  - 'k8s/base/deployment.yaml'
+  - '|| exit 0'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=hello-cloudbuild'
 
  # Update Manifest in Anthos Config Management Directory 
 - id: 'Update Manifest'
