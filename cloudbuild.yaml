@@ -40,23 +40,11 @@ steps:
   args:
   - 'push'
   - 'gcr.io/$PROJECT_ID/gcpdemo:$COMMIT_SHA'
-
-# This step deletes existing deployment if any
-- id: 'Delete from GKE'
-  name: 'gcr.io/cloud-builders/kubectl' 
-  waitFor: ['Create Container']
-  args:
-  - 'delete'
-  - '-f'
-  - 'k8s/base/deployment.yaml'
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-b'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=hello-cloudbuild'
   
 # This step pushes the image to Kubernetes cluster
 - id: 'ApplyManifest'
   name: 'gcr.io/cloud-builders/kubectl' 
-  waitFor: ['Delete from GKE']
+  waitFor: ['Push to GCR Container Registry']
   args:
   - 'apply'
   - '-k'
