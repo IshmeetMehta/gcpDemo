@@ -40,9 +40,6 @@ steps:
   args:
   - 'push'
   - 'gcr.io/$PROJECT_ID/gcpdemo:$SHORT_SHA'
-# [END cloudbuild]
-
-
 
 # This step pushes the image to Kubernetes cluster
 - id: 'Push to GKE'
@@ -55,3 +52,4 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=$_CLOUDSDK_COMPUTE_ZONE'
   - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLOUDSDK_CONTAINER_CLUSTER'
+  # [END cloudbuild]
