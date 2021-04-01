@@ -69,8 +69,3 @@ availableSecrets:
   - 'push'
   - 'gcr.io/$PROJECT_ID/gcpDemo:$SHORT_SHA'
 # [END cloudbuild]
-
-availableSecrets:
-  secretManager:
-  - versionName: projects/1046932852410/secrets/gh-password
-    env: 'PASSWORD'
