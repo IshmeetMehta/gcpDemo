@@ -56,7 +56,7 @@ steps:
 
 # Update Manifest in Anthos Config Management Directory 
 - id: 'Update Manifest'
-  name: 'gcr.io/anthos-tech-summit/gitops:1.0'
+  name: 'gcr.io/cloud-builders/kustomize'
   waitFor: ['Push to GCR Container Registry']
   args:
   - '-c' # pass what follows as a command to bash
