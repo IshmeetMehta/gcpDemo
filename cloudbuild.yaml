@@ -56,7 +56,7 @@ steps:
 
   # Update Manifest in Anthos Config Management Directory 
 - id: 'Update Manifest'
-  name: 'gcr.io/anthos-tech-summit/gitops:1.0'
+  name: 'gcr.io/$PROJECT_ID/kustomize:latest'
   waitFor: ['Delete from GKE']
   entrypoint: 'bash'
   args:
