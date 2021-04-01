@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: gcpdemo
-        image: gcr.io/ishmeetm/gcpdemo:COMMIT_SHA
+        image: gcr.io/ishmeetm/gcpdemo:$COMMIT_SHA
         ports:
         - containerPort: 8080
 
