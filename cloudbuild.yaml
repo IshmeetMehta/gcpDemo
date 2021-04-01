@@ -60,7 +60,7 @@ steps:
   args:
   - 'apply'
   - '-k'
-  - 'k8s/base'
+  - 'k8s/overlays/production'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-b'
   - 'CLOUDSDK_CONTAINER_CLUSTER=hello-cloudbuild'
