@@ -35,7 +35,7 @@ steps:
 # This step deletes existing deployment if any
 - id: 'Delete from GKE'
   name: 'gcr.io/cloud-builders/kubectl' 
-  waitFor: ['Push to GCR Container Registry']
+  waitFor: ['Create Container']
   args:
   - 'delete'
   - '-f'
@@ -50,7 +50,7 @@ steps:
 # The PROJECT_ID and SHORT_SHA variables are automatically
 # replaced by Cloud Build.
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'Delete from GKE'
+  id: 'Push to GCR Container Registry'
   args:
   - 'push'
   - 'gcr.io/$PROJECT_ID/gcpdemo:$COMMIT_SHA'
