@@ -68,7 +68,7 @@ steps:
 - id: 'ApplyManifest'
   name: 'gcr.io/cloud-builders/kubectl' 
   waitFor: ['Update Manifest']
-  entrypoint: 'sh'
+  entrypoint: 'bash'
   args:
   - 'apply'
   - '-k'
