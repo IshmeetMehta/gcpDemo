@@ -1,5 +1,5 @@
-resources:
+bases:
 - ../../base
 images:
-- name : ishmeetm/gcpdemo
-  newTag: latest
+- name : gcr.io/ishmeetm/gcpdemo
+  newTag: dev
