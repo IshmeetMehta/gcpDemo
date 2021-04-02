@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: gcpdemo
-        image: gcr.io/$PROJECT_ID/gcpDemo:latest
+        image: gcr.io/ishmeetm/gcpDemo:1.0.1
         ports:
         - containerPort: 8080
 
