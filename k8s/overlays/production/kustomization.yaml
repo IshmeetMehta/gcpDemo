@@ -2,4 +2,4 @@ bases:
 - ../../base
 images:
 - name : gcr.io/ishmeetm/gcpdemo
-  newTag: ${COMMIT_SHA}
+  newTag: prod
