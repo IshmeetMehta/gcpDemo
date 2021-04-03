@@ -51,5 +51,5 @@ steps:
     set -x && \
     export KUBECONFIG="$(pwd)/gateway-kubeconfig" && \
     gcloud beta container hub memberships get-credentials aks-cluster-1 && \
-    kubectl --kubeconfig=gateway-kubeconfig apply -f k8s/base/deployment.yaml
+    kubectl --kubeconfig=gateway-kubeconfig cluster-info
   # [END cloudbuild]
