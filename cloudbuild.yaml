@@ -50,6 +50,6 @@ steps:
   - |
     set -x && \
     export KUBECONFIG="$(pwd)/gateway-kubeconfig" && \
-    gcloud beta container hub memberships get-credentials aks-cluster-1 && \
+    gcloud beta container hub memberships get-credentials aks-cluster && \
     kubectl --kubeconfig=gateway-kubeconfig cluster-info
   # [END cloudbuild]
