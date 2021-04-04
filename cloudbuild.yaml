@@ -44,8 +44,8 @@ steps:
 # This step deletes the existing deployment of Anthos cluster
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
-  id: "Delete from Anthos registered clusters on aks"
-  waitFor: ['Delete from GKE']
+  id: "'Delete from GKE'"
+  waitFor: ['Push to GCR Container Registry']
   args:
   - '-c'
   - |
