@@ -41,10 +41,23 @@ steps:
   - 'push'
   - 'gcr.io/$PROJECT_ID/gcpdemo:prod'
 
+# This step deletes existing deployment if any
+- id: 'Delete from GKE'
+  name: 'gcr.io/cloud-builders/kubectl' 
+  waitFor: ['Push to GCR Container Registry']
+  args:
+  - 'delete'
+  - '-k'
+  - 'k8s/overlays/production'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=hello-cloudbuild'
+
 # This step pushes the image to Kubernetes cluster
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
   id: "Deploy to Anthos registered clusters on aks"
+  waitFor: ['Delete from GKE']
   args:
   - '-c'
   - |
