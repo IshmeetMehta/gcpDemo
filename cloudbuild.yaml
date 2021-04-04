@@ -49,9 +49,6 @@ steps:
   - 'delete'
   - '-k'
   - 'k8s/overlays/production'
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-b'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=hello-cloudbuild'
 
 # This step pushes the image to Kubernetes cluster
 - name: 'gcr.io/cloud-builders/gcloud'
