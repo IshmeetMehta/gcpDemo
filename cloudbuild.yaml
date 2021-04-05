@@ -41,10 +41,10 @@ steps:
   - 'push'
   - 'gcr.io/$PROJECT_ID/gcpdemo:prod'
 
-# This step deletes the existing deployment of Anthos cluster
+# This step deletes the existing deployment of Anthos AKS cluster
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
-  id: "Delete from GKE"
+  id: "Delete from AKS cluster"
   waitFor: ['Push to GCR Container Registry']
   args:
   - '-c'
@@ -55,17 +55,46 @@ steps:
     kubectl --kubeconfig=gateway-kubeconfig delete -k k8s/overlays/production
   # [END cloudbuild]
 
+# This step deletes the existing deployment of Anthos GKE cluster
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: /bin/sh
+  id: "Delete from GKE cluster"
+  waitFor: ['Push to GCR Container Registry']
+  args:
+  - '-c'
+  - |
+    set -x && \
+    export KUBECONFIG="$(pwd)/gateway-kubeconfig" && \
+    gcloud beta container hub memberships get-credentials gke-cluster && \
+    kubectl --kubeconfig=gateway-kubeconfig delete -k k8s/overlays/production
+  # [END cloudbuild]
+
 
 # This step pushes the image to Kubernetes cluster
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
-  id: "Deploy to Anthos registered clusters on aks"
-  waitFor: ['Delete from GKE']
+  id: "Deploy to Anthos AKS cluster"
+  waitFor: ['Delete from AKS cluster']
   args:
   - '-c'
   - |
     set -x && \
     export KUBECONFIG="$(pwd)/gateway-kubeconfig" && \
     gcloud beta container hub memberships get-credentials aks-cluster && \
+    kubectl --kubeconfig=gateway-kubeconfig apply -k k8s/overlays/production
+  # [END cloudbuild]
+
+
+  # This step pushes the image to Kubernetes cluster
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: /bin/sh
+  id: "Deploy to Anthos registered GKE cluster"
+  waitFor: ['Delete from GKE cluster']
+  args:
+  - '-c'
+  - |
+    set -x && \
+    export KUBECONFIG="$(pwd)/gateway-kubeconfig" && \
+    gcloud beta container hub memberships get-credentials gke-cluster && \
     kubectl --kubeconfig=gateway-kubeconfig apply -k k8s/overlays/production
   # [END cloudbuild]
