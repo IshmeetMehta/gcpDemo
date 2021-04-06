@@ -23,6 +23,20 @@ steps:
   - -c
   - 'pip install flask && python test_app.py -v'
 
+  # This step pushes the image to AKS Kubernetes cluster
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: /bin/sh
+  id: 'Test Deploy AKS Cluster 1.0'
+  waitFor: ['python:3.7-slim']
+  args:
+  - '-c'
+  - |
+    set -x && \
+    export KUBECONFIG="$(pwd)/gateway-aks-kubeconfig" && \
+    gcloud beta container hub memberships get-credentials aks-cluster && \
+    kubectl --kubeconfig=gateway-aks-kubeconfig apply -k k8s/overlays/production
+  # [END cloudbuild]
+
 # This step builds the container image.
 - name: 'gcr.io/cloud-builders/docker'
   id: 'Create Container'
