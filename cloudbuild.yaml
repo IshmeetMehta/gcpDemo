@@ -42,7 +42,7 @@ steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
   id: "Test Deploy to Anthos registered GKE cluster 1.0 "
-  waitFor: ['Delete from GKE cluster']
+  waitFor: ['Run Tests']
   args:
   - '-c'
   - |
