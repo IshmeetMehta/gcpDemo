@@ -27,7 +27,7 @@ steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
   id: 'Test Deploy AKS Cluster 1.0'
-  waitFor: ['python:3.7-slim']
+  waitFor: ['Run Tests']
   args:
   - '-c'
   - |
