@@ -26,7 +26,7 @@ steps:
   # This step pushes the image to AKS Kubernetes cluster
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
-  id: 'Test Deploy AKS Cluster 1.0'
+  id: 'Test Deploy to Anthos registered AKS cluster 1.0'
   waitFor: ['Run Tests']
   args:
   - '-c'
@@ -35,6 +35,21 @@ steps:
     export KUBECONFIG="$(pwd)/gateway-aks-kubeconfig" && \
     gcloud beta container hub memberships get-credentials aks-cluster && \
     kubectl --kubeconfig=gateway-aks-kubeconfig apply -k k8s/overlays/production
+  # [END cloudbuild]
+
+
+# This step deploys the image to GKE cluster
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: /bin/sh
+  id: "Test Deploy to Anthos registered GKE cluster 1.0 "
+  waitFor: ['Delete from GKE cluster']
+  args:
+  - '-c'
+  - |
+    set -x && \
+    export KUBECONFIG="$(pwd)/gateway-gke-kubeconfig" && \
+    gcloud beta container hub memberships get-credentials gke-cluster && \
+    kubectl --kubeconfig=gateway-gke-kubeconfig apply -k k8s/overlays/production
   # [END cloudbuild]
 
 # This step builds the container image.
@@ -84,7 +99,7 @@ steps:
   # [END cloudbuild]
 
 
-# This step pushes the image to Kubernetes cluster
+# This step deploys the image to AKS cluster
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
   id: "Deploy to Anthos AKS cluster"
@@ -99,7 +114,7 @@ steps:
   # [END cloudbuild]
 
 
-# This step pushes the image to Kubernetes cluster
+# This step deploys the image to GKE cluster
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
   id: "Deploy to Anthos registered GKE cluster"
