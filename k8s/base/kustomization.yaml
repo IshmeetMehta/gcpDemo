@@ -9,5 +9,5 @@ resources:
 secretGenerator:
   - name: image-pull-secret
     files:
-+      - .dockerconfigjson=secrets/.dockerconfigjson
+      - .dockerconfigjson=secrets/.dockerconfigjson
     type: kubernetes.io/dockerconfigjson
