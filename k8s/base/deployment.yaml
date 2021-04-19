@@ -28,9 +28,8 @@ spec:
       labels:
         app: gcpdemo
     spec:
+      privileged: true
       containers:
-      securityContext:
-        privileged: true
       - name: gcpdemo
         image: gcr.io/ishmeetm/gcpdemo:1.0.1
         ports:
