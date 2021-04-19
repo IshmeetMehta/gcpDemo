@@ -35,6 +35,7 @@ steps:
     export KUBECONFIG="$(pwd)/gateway-aks-kubeconfig" && \
     gcloud beta container hub memberships get-credentials aks-cluster && \
     kubectl --kubeconfig=gateway-aks-kubeconfig apply -k k8s/overlays/production
+
   # [END cloudbuild]
 
 
