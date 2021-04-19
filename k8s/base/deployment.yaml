@@ -19,7 +19,7 @@ metadata:
   labels:
     app: gcpdemo
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: gcpdemo
@@ -36,4 +36,5 @@ spec:
         imagePullPolicy: Always
       imagePullSecrets:
       - name: varsecretname
-      
+
+
