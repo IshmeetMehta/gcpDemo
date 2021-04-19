@@ -20,7 +20,7 @@ metadata:
     app: front-end
 spec:
   securityContext:
-    runAsUser: 0
+    privileged: true
   containers:
   - name: gcpdemo
     image: gcr.io/ishmeetm/gcpdemo:1.0.1
