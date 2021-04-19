@@ -29,7 +29,7 @@ spec:
         app: gcpdemo
     spec:
       securityContext:
-          runAsUser: Any
+          runAsUser: 0
       containers:
       - name: gcpdemo
         image: gcr.io/ishmeetm/gcpdemo:1.0.1
