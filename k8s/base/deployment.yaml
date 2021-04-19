@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: gcpdemo
   labels:
@@ -28,9 +28,8 @@ spec:
       labels:
         app: gcpdemo
     spec:
-      privileged: true
-      seLinux:
-      rule: RunAsAny
+      securityContext:
+          runAsUser: Any
       containers:
       - name: gcpdemo
         image: gcr.io/ishmeetm/gcpdemo:1.0.1
