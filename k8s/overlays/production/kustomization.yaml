@@ -6,3 +6,5 @@ bases:
 images:
 - name : gcr.io/ishmeetm/gcpdemo
   newTag: prod
+
+namespace: gcpdemo-frontend
