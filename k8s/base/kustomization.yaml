@@ -6,3 +6,8 @@ resources:
   - deployment.yaml
   - namespace.yaml
 
+secretGenerator:
+  - name: image-pull-secret
+    files:
++      - .dockerconfigjson=secrets/.dockerconfigjson
+    type: kubernetes.io/dockerconfigjson
