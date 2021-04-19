@@ -28,7 +28,7 @@ spec:
       privileged: true
     imagePullPolicy: Always
   imagePullSecrets:
- - name: varsecretname
+  - name: varsecretname
 
 
 
