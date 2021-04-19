@@ -24,9 +24,9 @@ spec:
     image: gcr.io/ishmeetm/gcpdemo:1.0.1
     ports:    
        - containerPort: 8080
+    securityContext:
+      privileged: true
     imagePullPolicy: Always
-  imagePullSecrets:
-  - name: varsecretname
 
 
 
