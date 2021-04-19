@@ -96,7 +96,6 @@ steps:
     export KUBECONFIG="$(pwd)/gateway-gke-delete-kubeconfig" && \
     gcloud beta container hub memberships get-credentials gke-cluster && \
     kubectl --kubeconfig=gateway-gke-delete-kubeconfig delete -k k8s/overlays/production
-  # [END cloudbuild]
 
 
 # This step deploys the image to AKS cluster
