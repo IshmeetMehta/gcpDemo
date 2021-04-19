@@ -29,12 +29,12 @@ spec:
         app: gcpdemo
     spec:
       containers:
-        securityContext:
-          privileged: true
       - name: gcpdemo
         image: gcr.io/ishmeetm/gcpdemo:1.0.1
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
+        securityContext:
+          privileged: true
       imagePullSecrets:
       - name: varsecretname
