@@ -5,3 +5,9 @@ resources:
   - service.yaml
   - deployment.yaml
   - namespace.yaml
+
+secretGenerator:
+  - name: varsecretname
+    files:
+      - secrets/.dockerconfigjson
+    type: kubernetes.io/dockerconfigjson
