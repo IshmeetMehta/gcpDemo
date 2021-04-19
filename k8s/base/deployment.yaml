@@ -19,7 +19,7 @@ metadata:
   labels:
     app: gcpdemo
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: gcpdemo
