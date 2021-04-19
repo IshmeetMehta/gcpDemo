@@ -12,31 +12,52 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: gcpdemo
-  labels:
-    app: gcpdemo
+  labels: 
+    app: front-end
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: gcpdemo
-  template:
-    metadata:
-      labels:
-        app: gcpdemo
-    spec:
-      securityContext:
-          runAsUser: 0
-      containers:
-      - name: gcpdemo
-        image: gcr.io/ishmeetm/gcpdemo:1.0.1
-        ports:
-        - containerPort: 8080
-        imagePullPolicy: Always
-      imagePullSecrets:
-      - name: varsecretname
+  securityContext:
+    runAsUser: 0
+  containers:
+  - name: gcpdemo
+    image: gcr.io/ishmeetm/gcpdemo:1.0.1
+    ports:    
+       - containerPort: 8080
+    imagePullPolicy: Always
+  imagePullSecrets:
+  - name: varsecretname
+
+
+
+# ===== Deployment
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: gcpdemo
+#   labels:
+#     app: gcpdemo
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: gcpdemo
+#   template:
+#     metadata:
+#       labels:
+#         app: gcpdemo
+#     spec:
+#       securityContext:
+#           runAsUser: 0
+#       containers:
+#       - name: gcpdemo
+#         image: gcr.io/ishmeetm/gcpdemo:1.0.1
+#         ports:
+#         - containerPort: 8080
+#         imagePullPolicy: Always
+#       imagePullSecrets:
+#       - name: varsecretname
 
 
