@@ -35,5 +35,5 @@ spec:
         - containerPort: 8080
         imagePullPolicy: Always
       imagePullSecrets:
-      - name: varsecretname 
+      - name: varsecretname
       
