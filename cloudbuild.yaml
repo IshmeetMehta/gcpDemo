@@ -43,7 +43,7 @@ steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: /bin/sh
   id: "Test Deploy to Anthos registered GKE cluster 1.0 "
-  waitFor: ['Run Tests']
+  waitFor: ['Test Deploy to Anthos registered AKS cluster 1.0']
   args:
   - '-c'
   - |
