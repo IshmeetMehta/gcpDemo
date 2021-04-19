@@ -7,7 +7,7 @@ resources:
   - namespace.yaml
 
 secretGenerator:
-  - name: image-pull-secret
+  - name: varsecretname
     files:
       - .dockerconfigjson=secrets/.dockerconfigjson
     type: kubernetes.io/dockerconfigjson
